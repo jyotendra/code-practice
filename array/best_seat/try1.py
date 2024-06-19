@@ -1,5 +1,5 @@
 from typing import List, Optional
-from math import ceil
+from math import ceil, floor
 
 
 def bestSeat(seats: List[int]):
@@ -31,6 +31,10 @@ def bestSeat(seats: List[int]):
 
 
 if __name__ == "__main__":
-    t1 = [1, 0, 1, 0, 0, 0, 1]
+    t1 = [1, 0, 1]
     seat_index = bestSeat(t1)
-    assert seat_index == 4
+    assert seat_index == 1
+    # ------------------
+    t2 = [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1]
+    seat_index = bestSeat(t2)
+    assert seat_index == 3
