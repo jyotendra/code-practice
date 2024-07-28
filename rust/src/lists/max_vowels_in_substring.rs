@@ -1,30 +1,39 @@
 use crate::common::solution::LeetCodeTest;
 use std::cmp::max;
 use std::collections::{HashMap, HashSet};
+use std::vec;
 
 pub struct Solution;
 
 impl Solution {
     pub fn max_vowels(s: String, k: i32) -> i32 {
         let vowel_collection: HashSet<char> = ['a', 'e', 'i', 'o', 'u'].into_iter().collect();
-        let mut alphabet_is_vowel_map: HashMap<char, bool> = HashMap::new();
-        let mut max_vowel_count = 0;
-        let mut current_vowel_count = 0;
-        for c in s.chars() {
-            let char_is_vowel = alphabet_is_vowel_map
-                .entry(c)
-                .or_insert(vowel_collection.contains(&c));
-            if *char_is_vowel {
-                current_vowel_count += 1;
-            } else {
-                max_vowel_count = max(max_vowel_count, current_vowel_count);
-                current_vowel_count = 0;
-            }
-            if current_vowel_count == k {
-                return current_vowel_count;
+        let mut max_count = 0;
+        let vector_str: Vec<char> = s.chars().collect();
+        // compute all the vowels in current slice first
+        for i in 0..k {
+            if vowel_collection.contains(&vector_str[i as usize]) {
+                max_count += 1;
             }
         }
-        max_vowel_count
+
+        let mut current_count = max_count; // this is the count in first time
+        for j in 0..(s.len() as i32) - k {
+            // consider that the slice has been moved
+            // the previous element will be
+            let element_skipped = vector_str.get(j as usize).unwrap();
+            if (vowel_collection.contains(element_skipped) && current_count > 0) {
+                current_count -= 1;
+            }
+            let element_added = vector_str.get((j + k) as usize).unwrap();
+            if (vowel_collection.contains(element_added)) {
+                current_count += 1;
+            }
+
+            max_count = max(max_count, current_count);
+        }
+
+        return max_count;
     }
 }
 

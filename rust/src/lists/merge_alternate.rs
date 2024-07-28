@@ -12,7 +12,7 @@ impl Solution {
             if (i <= word1_len) {
                 new_word.push(word1.chars().nth(i).unwrap())
             }
-            if (i <= word2_len) {
+            if i <= word2_len {
                 new_word.push(word2.chars().nth(i).unwrap())
             }
         }
