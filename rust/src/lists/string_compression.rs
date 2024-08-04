@@ -43,41 +43,26 @@ impl Solution {
         if chars.len() == 1 {
             return 1;
         }
-        let mut current_repition_count = 1;
-        let mut result: Vec<char> = vec![*chars.get(0).unwrap()];
-        let mut i = 1;
 
+        let mut i: usize = 0;
+        let mut res = 0;
         while i < chars.len() {
-            let prev_el = chars.get(i - 1);
-            let current_char = chars.get(i).unwrap();
-            if let Some(prev_char) = prev_el {
-                if *prev_char == *current_char {
-                    current_repition_count += 1;
-                } else {
-                    if (current_repition_count > 1) {
-                        let char_current_repition_count: Vec<char> =
-                            current_repition_count.to_string().chars().collect();
-                        result = [result, char_current_repition_count].concat();
-                        current_repition_count = 0;
-                    }
-                    result.push(*current_char);
-                    current_repition_count = 1;
-                }
+            let mut group_len = 1;
+            while i + group_len < chars.len() && chars[i] == chars[i + group_len] {
+                group_len += 1;
             }
-            i += 1;
-            if i >= chars.len() {
-                let char_current_repition_count: Vec<char> =
-                    current_repition_count.to_string().chars().collect();
-                result = [result, char_current_repition_count].concat();
-                current_repition_count = 0;
+            chars[res] = chars[i];
+            res += 1;
+            if group_len > 1 {
+                let str_group_len: Vec<char> = group_len.to_string().chars().collect();
+                let char_required = str_group_len.len();
+                chars.splice(res..res + char_required, str_group_len);
+                res += char_required;
             }
+            i += group_len;
         }
-
-        println!("{:?}", result);
-        // writes back to the input chars vector
-        chars.clear();
-        chars.extend(result.iter().cloned());
-        return result.len() as i32;
+        println!("{:?}", chars);
+        res as i32
     }
 }
 
