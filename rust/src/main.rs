@@ -1,6 +1,7 @@
 mod common;
 mod linked_list;
 mod lists;
+mod strings;
 
 use common::solution::LeetCodeTest;
 
@@ -11,6 +12,7 @@ fn main() {
     // let solution = lists::max_vowels_in_substring::Solution {};
     // let solution = linked_list::min_max_node::Solution {};
     // let solution = lists::string_compression::Solution {};
-    let solution = lists::increasing_triplet_sequence::Solution {};
+    // let solution = lists::increasing_triplet_sequence::Solution {};
+    let solution = strings::gcd_of_strings::Solution {};
     solution.test_self();
 }
