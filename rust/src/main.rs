@@ -2,6 +2,7 @@ mod common;
 mod linked_list;
 mod lists;
 mod strings;
+mod two_pointer;
 
 use common::solution::LeetCodeTest;
 
@@ -13,6 +14,7 @@ fn main() {
     // let solution = linked_list::min_max_node::Solution {};
     // let solution = lists::string_compression::Solution {};
     // let solution = lists::increasing_triplet_sequence::Solution {};
-    let solution = strings::gcd_of_strings_1::Solution {};
+    // let solution = strings::gcd_of_strings_1::Solution {};
+    let solution = two_pointer::move_zeroes::Solution {};
     solution.test_self();
 }
