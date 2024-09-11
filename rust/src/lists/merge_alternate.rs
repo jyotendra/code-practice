@@ -9,7 +9,7 @@ impl Solution {
         let word2_len = word2.chars().count();
         let mut new_word: Vec<char> = vec![];
         for i in 0..max(word1_len, word2_len) {
-            if (i <= word1_len) {
+            if i <= word1_len {
                 new_word.push(word1.chars().nth(i).unwrap())
             }
             if i <= word2_len {
